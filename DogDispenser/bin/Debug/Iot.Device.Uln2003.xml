@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Iot.Device.Uln2003</name>
+    </assembly>
+    <members>
+        <member name="T:Iot.Device.Uln2003.StepperMode">
+            <summary>
+            The 28BYJ-48 motor has 512 full engine rotations to rotate the drive shaft once.
+            In half-step mode these are 8 x 512 = 4096 steps for a full rotation.
+            In full-step mode these are 4 x 512 = 2048 steps for a full rotation.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Uln2003.StepperMode.HalfStep">
+            <summary>Half step mode.</summary>
+        </member>
+        <member name="F:Iot.Device.Uln2003.StepperMode.FullStepSinglePhase">
+            <summary>Full step mode (single phase).</summary>
+        </member>
+        <member name="F:Iot.Device.Uln2003.StepperMode.FullStepDualPhase">
+            <summary>Full step mode (dual phase).</summary>
+        </member>
+        <member name="T:Iot.Device.Uln2003.Uln2003">
+            <summary>
+            This class is for controlling stepper motors that are controlled by a 4 pin controller board.
+            </summary>
+            <remarks>It is tested and developed using the 28BYJ-48 stepper motor and the ULN2003 driver board.</remarks>
+        </member>
+        <member name="F:Iot.Device.Uln2003.Uln2003.StepperMotorDefaultDelay">
+            <summary>
+            Default delay in microseconds.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Uln2003.Uln2003.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Device.Gpio.GpioController,System.Boolean,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Iot.Device.Uln2003.Uln2003" /> class.
+            </summary>
+            <param name="pin1">The GPIO pin number which corresponds pin A on ULN2003 driver board.</param>
+            <param name="pin2">The GPIO pin number which corresponds pin B on ULN2003 driver board.</param>
+            <param name="pin3">The GPIO pin number which corresponds pin C on ULN2003 driver board.</param>
+            <param name="pin4">The GPIO pin number which corresponds pin D on ULN2003 driver board.</param>
+            <param name="controller">The controller.</param>
+            <param name="shouldDispose">True to dispose the Gpio Controller.</param>
+            <param name="stepsToRotate">Amount of steps needed to rotate motor once in HalfStepMode.</param>
+        </member>
+        <member name="P:Iot.Device.Uln2003.Uln2003.RPM">
+            <summary>
+            Gets or sets the motor speed to revolutions per minute.
+            </summary>
+            <remarks>Default revolutions per minute for 28BYJ-48 is approximately 15.</remarks>
+        </member>
+        <member name="P:Iot.Device.Uln2003.Uln2003.Mode">
+            <summary>
+            Gets or sets the stepper's mode.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Uln2003.Uln2003.Stop">
+            <summary>
+            Stop the motor.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Uln2003.Uln2003.Step(System.Int32)">
+            <summary>
+            Moves the motor. If the number is negative, the motor moves in the reverse direction.
+            </summary>
+            <param name="steps">Number of steps.</param>
+        </member>
+        <member name="M:Iot.Device.Uln2003.Uln2003.Rotate(System.Int32)">
+            <summary>
+            Rotates the motor. If the number is negative, the motor moves in the reverse direction.
+            </summary>
+            <param name="rotations">Number of rotations.</param>
+        </member>
+        <member name="M:Iot.Device.Uln2003.Uln2003.Dispose">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>
