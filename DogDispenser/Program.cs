@@ -5,13 +5,8 @@ namespace DogDispenser
 {
     public class Program
     {
-        //const string WIFI_SSID = "MOVISTAR_C92D";
-        //const string WIFI_PASSWORD = "VDL3oHDECfhvLHunzrKi";
-
-
-        const string WIFI_SSID = "vivo V29";
-        const string WIFI_PASSWORD = "bonny!01";
-
+        const string WIFI_SSID = "MOVISTAR_C92D";
+        
         const bool USE_ACCESS_POINT_MODE = false;
 
         public static void Main()
