@@ -27,7 +27,9 @@ namespace DogDispenser
                 Debug.WriteLine("Waiting for WiFi adapter to be ready...");
                 Thread.Sleep(10000);
 
-                _wifiAdapter = WifiAdapter.FindAllAdapters()[0]; 
+                _wifiAdapter = WifiAdapter.FindAllAdapters()[0];
+
+               // ScanNetworks();
 
                 var result = _wifiAdapter.Connect(ssid, WifiReconnectionKind.Automatic, password);
 
@@ -114,21 +116,11 @@ namespace DogDispenser
         {
             try
             {
-                if (_wifiAdapter == null)
-                {
-                    var adapters = WifiAdapter.FindAllAdapters();
-                    if (adapters == null || adapters.Length == 0)
-                    {
-                        Debug.WriteLine("ERRORE: Nessun adattatore WiFi trovato!");
-                        return;
-                    }
-                    _wifiAdapter = adapters[0];
-                }
-
                 Debug.WriteLine("Scansione reti WiFi in corso...");
 
                 _wifiAdapter.ScanAsync();
-                Thread.Sleep(2000);
+
+                Thread.Sleep(5000);
 
                 var networks = _wifiAdapter.NetworkReport.AvailableNetworks;
                 Debug.WriteLine($"Trovate {networks.Length} reti:");
