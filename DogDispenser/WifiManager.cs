@@ -33,24 +33,18 @@ namespace DogDispenser
 
                 var result = _wifiAdapter.Connect(ssid, WifiReconnectionKind.Automatic, password);
 
-                if (result.ConnectionStatus == WifiConnectionStatus.Success)
-                {
-                    Debug.WriteLine("WiFi connesso con successo!");
-                    
-                    _ledManager.WaitingForNetworkCardInformation();
-                    Thread.Sleep(5000);
+                _ledManager.WaitingForNetworkCardInformation();
 
-                    if (GetNetworkInfo())
-                    {
-                        IsConnected = true;
-                        return true;
-                    }
+                Thread.Sleep(5000);
+
+                if (!GetNetworkInfo())
+                {
+                    IsConnected = false;
+                    return false;
                 }
 
-                Debug.WriteLine($"Connessione WiFi fallita: {result.ConnectionStatus}");
-
-                IsConnected = false;
-                return false;
+                IsConnected = true;
+                return true;
             }
             catch (Exception ex)
             {
@@ -71,6 +65,8 @@ namespace DogDispenser
                     if (ni.NetworkInterfaceType != NetworkInterfaceType.Wireless80211) continue;
 
                     IpAddress = ni.IPv4Address;
+
+                    if (IpAddress == "0.0.0.0") return false;
 
                     Debug.WriteLine("=================================");
                     Debug.WriteLine("WiFi Connesso!");
